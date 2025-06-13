@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "524570251825",
+    "project_id": "gigs-a63da",
+    "storage_bucket": "gigs-a63da.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524570251825:android:ceb5714ce10fea97197b10",
+        "android_client_info": {
+          "package_name": "com.gigs.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnVGRLf-tVFupyhv2JGwQaFkcnceNg6xs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
