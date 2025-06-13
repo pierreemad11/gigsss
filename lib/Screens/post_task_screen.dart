@@ -181,7 +181,7 @@ class _PostTaskScreenState extends State<PostTaskScreen> {
         );
       },
       style: OutlinedButton.styleFrom(
-        side: BorderSide(color: Colors.grey.shade400),
+        side: const BorderSide(color: Color(0xFFE0E0E0)),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),

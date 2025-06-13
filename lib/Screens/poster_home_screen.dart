@@ -10,6 +10,7 @@ import 'edit_task_screen.dart';
 import 'category_tasks_screen.dart';
 import 'Chat_messages.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'task_details_entry_screen.dart';
 
 class PosterHomeScreen extends StatefulWidget {
   const PosterHomeScreen({super.key});
@@ -103,9 +104,9 @@ class _PosterHomeScreenState extends State<PosterHomeScreen> with SingleTickerPr
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildStatusChip('First Task', Colors.yellow[700]!, Colors.white),
-              _buildStatusChip('5 Offers', Color(0xFF1DBF73), Colors.white),
-              _buildStatusChip('Top Rated', Colors.blue[300]!, Colors.white),
+              _buildStatusChip('First Task', Color(0xFFF9A825), Colors.black87),
+              _buildStatusChip('5 Offers', Color(0xFF81C784), Colors.black87),
+              _buildStatusChip('Top Rated', Color(0xFF64B5F6), Colors.black87),
             ],
           ),
           SizedBox(height: 20),
@@ -113,10 +114,10 @@ class _PosterHomeScreenState extends State<PosterHomeScreen> with SingleTickerPr
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildStatusCount('Active', 1, Colors.blue),
-              _buildStatusCount('Pending', 3, Colors.orange),
-              _buildStatusCount('Completed', 0, Colors.green),
-              _buildStatusCount('Canceled', 0, Colors.red),
+              _buildStatusCount('Active', 1, Color(0xFF1976D2)),
+              _buildStatusCount('Pending', 3, Color(0xFFF9A825)),
+              _buildStatusCount('Completed', 0, Color(0xFF388E3C)),
+              _buildStatusCount('Canceled', 0, Color(0xFFD32F2F)),
             ],
           ),
           SizedBox(height: 20),
@@ -126,78 +127,117 @@ class _PosterHomeScreenState extends State<PosterHomeScreen> with SingleTickerPr
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildCategoryButton(Icons.local_shipping, 'Moving'),
+              _buildCategoryButton(Icons.local_shipping, 'Hauling'),
+              _buildCategoryButton(Icons.computer, 'Computer'),
               _buildCategoryButton(Icons.cleaning_services, 'Cleaning'),
-              _buildCategoryButton(Icons.shopping_cart, 'Grocery'),
               _buildCategoryButton(Icons.delivery_dining, 'Delivery'),
-              _buildCategoryButton(Icons.add, 'Custom'),
             ],
           ),
           SizedBox(height: 20),
           // Current Task in Progress
           Container(
             width: double.infinity,
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.blue[50],
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.blue[100]!),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Color(0xFF1976D2), width: 1.2),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.06),
+                  blurRadius: 2,
+                  offset: Offset(0, 1),
+                ),
+              ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Current Task in Progress', style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(height: 8),
-                Text('Help move furniture to new apartment'),
-                SizedBox(height: 4),
-                Text('Runner: Mike Johnson', style: TextStyle(color: Colors.grey[700], fontSize: 13)),
-                SizedBox(height: 8),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CircleAvatar(
+                      radius: 18,
+                      backgroundColor: Color(0xFFE3EAFD),
+                      child: Icon(Icons.person, color: Color(0xFF1976D2)),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Help move furniture to new apartment',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black87),
+                          ),
+                          const SizedBox(height: 2),
+                          Text('Runner: Mike Johnson', style: TextStyle(color: Colors.grey[700], fontSize: 13)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    const Text('Progress', style: TextStyle(fontSize: 14, color: Colors.black87)),
+                    const Spacer(),
+                    Text('60%', style: TextStyle(fontSize: 14, color: Color(0xFF1976D2), fontWeight: FontWeight.w600)),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: LinearProgressIndicator(
+                    value: 0.6,
+                    minHeight: 6,
+                    backgroundColor: Colors.grey[200],
+                    color: Color(0xFF1976D2),
+                  ),
+                ),
+                const SizedBox(height: 18),
                 Row(
                   children: [
                     Expanded(
-                      child: LinearProgressIndicator(
-                        value: 0.6,
-                        backgroundColor: Colors.grey[200],
-                        color: Color(0xFF1DBF73),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text('60%'),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const ChatMessagesScreen(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                      ),
-                      child: Text('Message'),
-                    ),
-                    SizedBox(width: 10),
-                    OutlinedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const TaskDetailsScreen(
-                              title: 'Current Task in Progress',
-                              details: 'Help move furniture to new apartment\nRunner: Mike Johnson',
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const ChatMessagesScreen(),
                             ),
-                          ),
-                        );
-                      },
-                      style: OutlinedButton.styleFrom(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          );
+                        },
+                        icon: const Icon(Icons.chat_bubble_outline, size: 18, color: Colors.white),
+                        label: const Text('Message', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF1976D2),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          elevation: 0,
+                        ),
                       ),
-                      child: Text('Details'),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const TaskDetailsScreen(
+                                title: 'Current Task in Progress',
+                                details: 'Help move furniture to new apartment\nRunner: Mike Johnson',
+                              ),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.info_outline, size: 18, color: Colors.black87),
+                        label: const Text('Details', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w600)),
+                        style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                          side: const BorderSide(color: Color(0xFFE0E0E0)),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -217,7 +257,7 @@ class _PosterHomeScreenState extends State<PosterHomeScreen> with SingleTickerPr
             width: double.infinity,
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.yellow[100],
+              color: Color(0xFFF9A825),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -234,106 +274,214 @@ class _PosterHomeScreenState extends State<PosterHomeScreen> with SingleTickerPr
   }
 
   Widget _buildStatusChip(String label, Color color, Color textColor) {
+    // Use a solid background color for a bold look
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(16),
       ),
-      child: Text(label, style: TextStyle(color: textColor, fontWeight: FontWeight.bold)),
+      child: Text(
+        label,
+        style: const TextStyle(
+          color: Colors.black87,
+          fontWeight: FontWeight.w500,
+          fontSize: 14,
+        ),
+      ),
     );
   }
 
   Widget _buildStatusCount(String label, int count, Color color) {
-    return Column(
-      children: [
-        Text('$count', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
-        SizedBox(height: 4),
-        Text(label, style: TextStyle(color: Colors.grey[700], fontSize: 13)),
-      ],
-    );
-  }
-
-  Widget _buildCategoryButton(IconData icon, String label) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CategoryTasksScreen(category: label),
+    // White card background, colored number, subtle border/shadow
+    return Container(
+      width: 70,
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Color(0xFFE0E0E0), width: 1.2),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.06),
+            blurRadius: 2,
+            offset: Offset(0, 1),
           ),
-        );
-      },
+        ],
+      ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          CircleAvatar(
-            backgroundColor: Colors.grey[200],
-            child: Icon(icon, color: Colors.blue),
-          ),
-          SizedBox(height: 6),
-          Text(label, style: TextStyle(fontSize: 12)),
+          Text('$count', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
+          const SizedBox(height: 4),
+          Text(label, style: const TextStyle(color: Colors.black87, fontSize: 13, fontWeight: FontWeight.w500)),
         ],
       ),
     );
   }
 
-  Widget _buildUnassignedTask(String title, String offers, String time) {
-    return Card(
-      margin: EdgeInsets.only(bottom: 10),
-      child: ListTile(
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Text('$offers\n$time'),
-        isThreeLine: true,
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              icon: Icon(Icons.edit, color: Colors.grey[600]),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => EditTaskScreen(title: title),
-                  ),
-                );
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.delete, color: Colors.red[400]),
-              onPressed: () {
-                // TODO: Implement delete logic (show dialog for now)
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('Delete Task'),
-                    content: const Text('Are you sure you want to delete this task?'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: const Text('Cancel'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          // TODO: Remove the task from the list/database
-                        },
-                        child: const Text('Delete', style: TextStyle(color: Colors.red)),
-                      ),
-                    ],
-                  ),
-                );
-              },
+  Widget _buildCategoryButton(IconData icon, String label) {
+    // Consistent color codes for all cards and icons
+    final Map<String, Color> baseColors = {
+      'Hauling': Color(0xFF1976D2), // blue
+      'Computer': Color(0xFF1976D2), // blue
+      'Cleaning': Color(0xFF388E3C), // green
+      'Delivery': Color(0xFFF9A825), // amber/orange
+    };
+    final Map<String, Color> iconBgColors = {
+      'Hauling': Color(0xFF1976D2).withOpacity(0.12),
+      'Computer': Color(0xFF1976D2).withOpacity(0.12),
+      'Cleaning': Color(0xFF388E3C).withOpacity(0.12),
+      'Delivery': Color(0xFFF9A825).withOpacity(0.12),
+    };
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => TaskDetailsEntryScreen(category: label),
+          ),
+        );
+      },
+      child: Container(
+        width: 70,
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Color(0xFFE0E0E0), width: 1.2),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.08),
+              blurRadius: 4,
+              offset: Offset(0, 2),
             ),
           ],
         ),
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => TaskDetailsScreen(
-                title: title,
-                details: '$offers\n$time',
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: iconBgColors[label] ?? Colors.grey[200],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: const EdgeInsets.all(8),
+              child: Icon(icon, color: baseColors[label] ?? Colors.black87, size: 22),
+            ),
+            const SizedBox(height: 8),
+            Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black87)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUnassignedTask(String title, String offers, String time) {
+    // Parse offers to determine color
+    final bool hasOffers = offers.toLowerCase().contains('offer');
+    final bool noOffers = offers.toLowerCase().contains('no offer');
+    final Color offersColor = hasOffers && !noOffers ? Color(0xFF388E3C) : Colors.grey;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Color(0xFFE0E0E0), width: 1.2),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.06),
+            blurRadius: 2,
+            offset: Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.black87)),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      Text(offers, style: TextStyle(color: offersColor, fontSize: 14, fontWeight: FontWeight.w500)),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(time, style: const TextStyle(color: Colors.grey, fontSize: 13), textAlign: TextAlign.right),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          );
-        },
+            const SizedBox(width: 8),
+            Column(
+              children: [
+                SizedBox(
+                  width: 36,
+                  height: 36,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      side: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => EditTaskScreen(title: title),
+                        ),
+                      );
+                    },
+                    child: Icon(Icons.edit, color: Colors.grey[600], size: 20),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                SizedBox(
+                  width: 36,
+                  height: 36,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      side: BorderSide(color: Colors.red.shade100),
+                    ),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Delete Task'),
+                          content: const Text('Are you sure you want to delete this task?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                // TODO: Remove the task from the list/database
+                              },
+                              child: const Text('Delete', style: TextStyle(color: Colors.red)),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    child: Icon(Icons.delete, color: Colors.red[400], size: 20),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -556,9 +704,9 @@ class _PosterHomeScreenState extends State<PosterHomeScreen> with SingleTickerPr
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildStatusChip('First Task', Colors.yellow[700]!, Colors.white),
-                  _buildStatusChip('5 Offers', Color(0xFF1DBF73), Colors.white),
-                  _buildStatusChip('Top Rated', Colors.blue[300]!, Colors.white),
+                  _buildStatusChip('First Task', Color(0xFFFFD54F), Colors.black87),
+                  _buildStatusChip('5 Offers', Color(0xFF81C784), Colors.black87),
+                  _buildStatusChip('Top Rated', Color(0xFF64B5F6), Colors.black87),
                 ],
               ),
               SizedBox(height: 20),
@@ -566,10 +714,10 @@ class _PosterHomeScreenState extends State<PosterHomeScreen> with SingleTickerPr
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildStatusCount('Active', 1, Colors.blue),
-                  _buildStatusCount('Pending', 3, Colors.orange),
-                  _buildStatusCount('Completed', 0, Colors.green),
-                  _buildStatusCount('Canceled', 0, Colors.red),
+                  _buildStatusCount('Active', 1, Color(0xFF1976D2)),
+                  _buildStatusCount('Pending', 3, Color(0xFFF9A825)),
+                  _buildStatusCount('Completed', 0, Color(0xFF388E3C)),
+                  _buildStatusCount('Canceled', 0, Color(0xFFD32F2F)),
                 ],
               ),
               SizedBox(height: 20),
@@ -579,78 +727,117 @@ class _PosterHomeScreenState extends State<PosterHomeScreen> with SingleTickerPr
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildCategoryButton(Icons.local_shipping, 'Moving'),
+                  _buildCategoryButton(Icons.local_shipping, 'Hauling'),
+                  _buildCategoryButton(Icons.computer, 'Computer'),
                   _buildCategoryButton(Icons.cleaning_services, 'Cleaning'),
-                  _buildCategoryButton(Icons.shopping_cart, 'Grocery'),
                   _buildCategoryButton(Icons.delivery_dining, 'Delivery'),
-                  _buildCategoryButton(Icons.add, 'Custom'),
                 ],
               ),
               SizedBox(height: 20),
               // Current Task in Progress
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.blue[50],
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.blue[100]!),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Color(0xFF1976D2), width: 1.2),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.06),
+                      blurRadius: 2,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Current Task in Progress', style: TextStyle(fontWeight: FontWeight.bold)),
-                    SizedBox(height: 8),
-                    Text('Help move furniture to new apartment'),
-                    SizedBox(height: 4),
-                    Text('Runner: Mike Johnson', style: TextStyle(color: Colors.grey[700], fontSize: 13)),
-                    SizedBox(height: 8),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CircleAvatar(
+                          radius: 18,
+                          backgroundColor: Color(0xFFE3EAFD),
+                          child: Icon(Icons.person, color: Color(0xFF1976D2)),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Help move furniture to new apartment',
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black87),
+                              ),
+                              const SizedBox(height: 2),
+                              Text('Runner: Mike Johnson', style: TextStyle(color: Colors.grey[700], fontSize: 13)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        const Text('Progress', style: TextStyle(fontSize: 14, color: Colors.black87)),
+                        const Spacer(),
+                        Text('60%', style: TextStyle(fontSize: 14, color: Color(0xFF1976D2), fontWeight: FontWeight.w600)),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: LinearProgressIndicator(
+                        value: 0.6,
+                        minHeight: 6,
+                        backgroundColor: Colors.grey[200],
+                        color: Color(0xFF1976D2),
+                      ),
+                    ),
+                    const SizedBox(height: 18),
                     Row(
                       children: [
                         Expanded(
-                          child: LinearProgressIndicator(
-                            value: 0.6,
-                            backgroundColor: Colors.grey[200],
-                            color: Color(0xFF1DBF73),
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Text('60%'),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const ChatMessagesScreen(),
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                          ),
-                          child: Text('Message'),
-                        ),
-                        SizedBox(width: 10),
-                        OutlinedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const TaskDetailsScreen(
-                                  title: 'Current Task in Progress',
-                                  details: 'Help move furniture to new apartment\nRunner: Mike Johnson',
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const ChatMessagesScreen(),
                                 ),
-                              ),
-                            );
-                          },
-                          style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                              );
+                            },
+                            icon: const Icon(Icons.chat_bubble_outline, size: 18, color: Colors.white),
+                            label: const Text('Message', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFF1976D2),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              elevation: 0,
+                            ),
                           ),
-                          child: Text('Details'),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const TaskDetailsScreen(
+                                    title: 'Current Task in Progress',
+                                    details: 'Help move furniture to new apartment\nRunner: Mike Johnson',
+                                  ),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.info_outline, size: 18, color: Colors.black87),
+                            label: const Text('Details', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w600)),
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                              side: const BorderSide(color: Color(0xFFE0E0E0)),
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -670,7 +857,7 @@ class _PosterHomeScreenState extends State<PosterHomeScreen> with SingleTickerPr
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.yellow[100],
+                  color: Color(0xFFFFD54F),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(

@@ -51,34 +51,28 @@ class _ChatMessagesScreenState extends State<ChatMessagesScreen> {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: const InputDecoration(
-                      hintText: 'Type a message...',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                IconButton(
-                  icon: const Icon(Icons.send, color: Colors.blue),
-                  onPressed: _sendMessage,
-                ),
-              ],
-            ),
-          ),
         ],
       ),
-      bottomNavigationBar: Navbar(
-        selectedIndex: 3, // Assuming chat is the 4th tab
-        onItemTapped: (index) {
-          Navigator.of(context).popUntil((route) => route.isFirst);
-        },
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: _controller,
+                decoration: const InputDecoration(
+                  hintText: 'Type a message...',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            IconButton(
+              icon: const Icon(Icons.send, color: Colors.blue),
+              onPressed: _sendMessage,
+            ),
+          ],
+        ),
       ),
     );
   }

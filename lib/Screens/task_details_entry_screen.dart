@@ -107,11 +107,23 @@ class _TaskDetailsEntryScreenState extends State<TaskDetailsEntryScreen> {
                 ),
               ),
               const SizedBox(height: 20),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _titleController,
                 decoration: InputDecoration(
                   labelText: 'Task Title',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0), width: 1.5),
+                  ),
                   prefixIcon: const Icon(Icons.title),
                 ),
                 validator: (value) {
@@ -126,7 +138,18 @@ class _TaskDetailsEntryScreenState extends State<TaskDetailsEntryScreen> {
                 controller: _descriptionController,
                 decoration: InputDecoration(
                   labelText: 'Task Description',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0), width: 1.5),
+                  ),
                   prefixIcon: const Icon(Icons.description),
                   alignLabelWithHint: true,
                 ),
@@ -143,7 +166,18 @@ class _TaskDetailsEntryScreenState extends State<TaskDetailsEntryScreen> {
                 controller: _priceController,
                 decoration: InputDecoration(
                   labelText: 'Offer Price',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0), width: 1.5),
+                  ),
                   prefixIcon: const Icon(Icons.attach_money),
                 ),
                 keyboardType: TextInputType.number,
@@ -162,7 +196,18 @@ class _TaskDetailsEntryScreenState extends State<TaskDetailsEntryScreen> {
                 controller: _durationController,
                 decoration: InputDecoration(
                   labelText: 'Duration (e.g., 2 hours, 1 day)',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0), width: 1.5),
+                  ),
                   prefixIcon: const Icon(Icons.timelapse),
                 ),
                 validator: (value) {
@@ -177,7 +222,18 @@ class _TaskDetailsEntryScreenState extends State<TaskDetailsEntryScreen> {
                 controller: _startTimeController,
                 decoration: InputDecoration(
                   labelText: 'Start Time',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0), width: 1.5),
+                  ),
                   prefixIcon: const Icon(Icons.calendar_today),
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.arrow_drop_down),
@@ -197,7 +253,18 @@ class _TaskDetailsEntryScreenState extends State<TaskDetailsEntryScreen> {
                 controller: _endTimeController,
                 decoration: InputDecoration(
                   labelText: 'End Time',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0), width: 1.5),
+                  ),
                   prefixIcon: const Icon(Icons.calendar_today),
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.arrow_drop_down),
@@ -215,27 +282,22 @@ class _TaskDetailsEntryScreenState extends State<TaskDetailsEntryScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 30),
-              Center(
-                child: ElevatedButton(
-                  onPressed: _postTask,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1DBF73), // A shade of green
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  child: const Text(
-                    'Post Task',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
             ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
+        child: SizedBox(
+          width: double.infinity,
+          height: 48,
+          child: ElevatedButton(
+            onPressed: _postTask,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF1DBF73),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+            ),
+            child: const Text('Post Task', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           ),
         ),
       ),
