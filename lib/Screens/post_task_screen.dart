@@ -153,11 +153,11 @@ class _PostTaskScreenState extends State<PostTaskScreen> {
                 mainAxisSpacing: 10,
                 children: [
                   _buildCategoryButton(context, Icons.delivery_dining, 'Delivery'),
-                  _buildCategoryButton(context, Icons.handyman, 'Handyman'),
                   _buildCategoryButton(context, Icons.format_paint, 'Painting'),
                   _buildCategoryButton(context, Icons.cleaning_services, 'Cleaning'),
                   _buildCategoryButton(context, Icons.local_shipping, 'Hauling'),
                   _buildCategoryButton(context, Icons.computer, 'Computer'),
+                  _buildCategoryButton(context, Icons.handyman, 'Handyman'),
                   _buildCategoryButton(context, Icons.fitness_center, 'Heavy Lifting'),
                   _buildCategoryButton(context, Icons.camera_alt, 'Photography'),
                   _buildCategoryButton(context, Icons.people, 'Event Staffing'),
@@ -172,6 +172,18 @@ class _PostTaskScreenState extends State<PostTaskScreen> {
   }
 
   Widget _buildCategoryButton(BuildContext context, IconData icon, String label) {
+    // Color mapping for icons
+    final Map<String, Color> iconColors = {
+      'Hauling': Color(0xFF1976D2), // blue
+      'Computer': Color(0xFF1976D2), // blue
+      'Cleaning': Color(0xFF388E3C), // green
+      'Delivery': Color(0xFFF9A825), // amber/orange
+      'Handyman': Color(0xFFFB8C00), // deep orange
+      'Painting': Color(0xFF8E24AA), // purple
+      'Heavy Lifting': Color(0xFF00897B), // teal
+      'Photography': Color(0xFFD81B60), // pink
+      'Event Staffing': Color(0xFF3949AB), // indigo
+    };
     return OutlinedButton(
       onPressed: () {
         Navigator.of(context).push(
@@ -189,9 +201,9 @@ class _PostTaskScreenState extends State<PostTaskScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 30, color: Colors.blueGrey),
+          Icon(icon, size: 30, color: iconColors[label] ?? Colors.blueGrey),
           const SizedBox(height: 5),
-          Text(label, style: const TextStyle(fontSize: 12, color: Colors.blueGrey)),
+          Text(label, style: const TextStyle(fontSize: 12, color: Colors.black87)),
         ],
       ),
     );
