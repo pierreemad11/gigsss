@@ -70,15 +70,6 @@ class _PostTaskScreenState extends State<PostTaskScreen> {
                             style: const TextStyle(fontSize: 16),
                           ),
                         ),
-                        const SizedBox(width: 8),
-                        CircleAvatar(
-                          radius: 16,
-                          backgroundColor: Color(0xFFF48FB1),
-                          child: Text(
-                            'P', // Replace with user's initial if available
-                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -88,7 +79,7 @@ class _PostTaskScreenState extends State<PostTaskScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 80),
                       const Text(
                         'Describe your task.',
                         style: TextStyle(
@@ -115,25 +106,6 @@ class _PostTaskScreenState extends State<PostTaskScreen> {
                           color: Colors.white,
                           shadows: [Shadow(blurRadius: 8, color: Colors.black26)],
                         ),
-                      ),
-                      const SizedBox(height: 24),
-                      SizedBox(
-                        width: 180,
-                        height: 48,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF5B6BFE),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                            elevation: 0,
-                          ),
-                          child: const Text('Post a Task', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: Colors.white)),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text('How does it work?', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
                       ),
                     ],
                   ),
