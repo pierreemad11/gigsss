@@ -3,7 +3,7 @@ import '../widgets/task_poster_nav_bar.dart';
 import 'post_task_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../services/auth_service.dart';
-import 'profile_screen.dart';
+import 'MyAccount_screen.dart';
 import 'settings_screen.dart';
 import 'task_details_screen.dart';
 import 'edit_task_screen.dart';
@@ -581,42 +581,17 @@ class _PosterHomeScreenState extends State<PosterHomeScreen> with SingleTickerPr
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 12.0),
-            child: PopupMenuButton<String>(
-              icon: const CircleAvatar(
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                );
+              },
+              child: const CircleAvatar(
                 backgroundColor: Color(0xFFD0F5E8),
                 radius: 22,
                 child: Icon(Icons.person, color: Colors.blue, size: 28),
               ),
-              onSelected: (String result) async {
-                if (result == 'logout') {
-                  await _authService.signOut();
-                  if (mounted) {
-                    Navigator.of(context).pushReplacementNamed('/auth');
-                  }
-                } else if (result == 'profile') {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const ProfileScreen()),
-                  );
-                } else if (result == 'settings') {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const SettingsScreen()),
-                  );
-                }
-              },
-              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                const PopupMenuItem<String>(
-                  value: 'profile',
-                  child: Text('Profile'),
-                ),
-                const PopupMenuItem<String>(
-                  value: 'settings',
-                  child: Text('Settings'),
-                ),
-                const PopupMenuItem<String>(
-                  value: 'logout',
-                  child: Text('Logout'),
-                ),
-              ],
             ),
           ),
         ],

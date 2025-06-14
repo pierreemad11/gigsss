@@ -34,97 +34,107 @@ class _PostTaskScreenState extends State<PostTaskScreen> {
             height: 350,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage('https://via.placeholder.com/400x350/1DBF73/FFFFFF?text=Background'), // Network Placeholder image
+                image: AssetImage('assets/images/job.jpg'), // Use your local asset path
                 fit: BoxFit.cover,
               ),
             ),
             child: Stack(
               children: [
+                // Semi-transparent overlay for contrast
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.35),
+                  ),
+                ),
+                // Search bar at the top
                 Positioned(
-                  top: 20,
-                  left: 0,
-                  right: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  top: 24,
+                  left: 16,
+                  right: 16,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                     child: Row(
                       children: [
+                        const Icon(Icons.search, color: Colors.grey, size: 22),
+                        const SizedBox(width: 8),
                         Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(30),
+                          child: TextField(
+                            decoration: const InputDecoration(
+                              hintText: "What's next on your to-do list?",
+                              border: InputBorder.none,
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                hintText: '''What\'s next on your to-do list ?''',
-                                border: InputBorder.none,
-                                icon: Icon(Icons.search),
-                              ),
-                            ),
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 8),
                         CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Theme.of(context).colorScheme.primary,
-                          child: const Icon(Icons.person, color: Colors.white),
+                          radius: 16,
+                          backgroundColor: Color(0xFFF48FB1),
+                          child: Text(
+                            'P', // Replace with user's initial if available
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                Positioned(
-                  bottom: 50,
-                  left: 0,
-                  right: 0,
+                // Centered overlay text and button
+                Positioned.fill(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const SizedBox(height: 40),
+                      const Text(
                         'Describe your task.',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 26,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
+                          shadows: [Shadow(blurRadius: 8, color: Colors.black26)],
                         ),
                       ),
-                      Text(
+                      const Text(
                         'Review your offers.',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 26,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
+                          shadows: [Shadow(blurRadius: 8, color: Colors.black26)],
                         ),
                       ),
-                      Text(
+                      const Text(
                         'Get things done.',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 26,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
+                          shadows: [Shadow(blurRadius: 8, color: Colors.black26)],
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     // Handle Post Task button press - will be removed later
-                      //   },
-                      //   style: ElevatedButton.styleFrom(
-                      //     backgroundColor: const Color(0xFF1DBF73),
-                      //     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                      //     shape: RoundedRectangleBorder(
-                      //       borderRadius: BorderRadius.circular(30),
-                      //     ),
-                      //   ),
-                      //   child: const Text(
-                      //     'Post Task',
-                      //     style: TextStyle(
-                      //       fontSize: 18,
-                      //       color: Colors.white,
-                      //     ),
-                      //   ),
-                      // ),
+                      const SizedBox(height: 24),
+                      SizedBox(
+                        width: 180,
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF5B6BFE),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                            elevation: 0,
+                          ),
+                          child: const Text('Post a Task', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: Colors.white)),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text('How does it work?', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
+                      ),
                     ],
                   ),
                 ),
